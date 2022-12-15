@@ -7,7 +7,8 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  job1:
+    build:
     env:
       CI: true
 
@@ -29,14 +30,34 @@ jobs:
 
       - name: Run UTs
         run: npm start
-      
-      - name: open client
-        run: cd client
 
-      - name: run client
+  job2:
+    needs: job1
+
+    build:
+    env:
+      CI: true
+
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        node-version: [15.4.0]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run UTs
         run: npm start
 
-      - name: Build production app
+    - name: Build production app
         run: npm run build
 
       - name: Deploy
@@ -44,3 +65,6 @@ jobs:
         with:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           publish_dir: ./build
+
+
+    
