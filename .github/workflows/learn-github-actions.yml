@@ -7,8 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  job1:
-    env:
+env:
       CI: true
 
     runs-on: windows-latest
@@ -17,6 +16,7 @@ jobs:
       matrix:
         node-version: [15.4.0]
 
+  job1:
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
@@ -30,17 +30,9 @@ jobs:
       - name: Run UTs
         run: npm start
 
+
   job2:
     needs: job1
-
-    env:
-      CI: true
-
-    runs-on: windows-latest
-
-    strategy:
-      matrix:
-        node-version: [15.4.0]
 
     steps:
       - uses: actions/checkout@v3
