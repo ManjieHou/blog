@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  my_first_job:
+  job1:
    runs-on: windows-latest
 
    steps:
@@ -23,7 +23,7 @@ jobs:
       - name: Run UTs
         run: npm start
 
-   my_second_job:
+   job2:
     needs: my_first_job
 
     runs-on: windows-latest
