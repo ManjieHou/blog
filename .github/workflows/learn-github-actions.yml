@@ -8,7 +8,6 @@ on:
 
 jobs:
   job1:
-    build:
     env:
       CI: true
 
@@ -34,7 +33,6 @@ jobs:
   job2:
     needs: job1
 
-    build:
     env:
       CI: true
 
@@ -50,7 +48,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      
+      - name: Open Client
+        run: cd client
+
       - name: Install dependencies
         run: npm install
 
