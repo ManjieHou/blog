@@ -6,9 +6,26 @@ on:
   pull_request:
     branches: [ master ]
 
-
 jobs:
+  job_1:
+   runs-on: windows-latest
+
+   steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js 
+        uses: actions/setup-node@v3
+        with:
+          node-version: '15.x'
+      
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run UTs
+        run: npm start
+        
   job_2:
+    needs: job_1
+    
     runs-on: windows-latest
 
     steps:
