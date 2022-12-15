@@ -24,9 +24,14 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       
-      - run: npm ci --ignore-scripts
-      - run: npm run build --if-present
-      - run: npm test
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run UTs
+        run: npm test
+
+      - name: Build production app
+        run: npm run build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
