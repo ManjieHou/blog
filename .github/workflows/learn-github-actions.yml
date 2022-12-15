@@ -7,7 +7,8 @@ on:
     branches: [ master ]
 
 jobs:
-  job_1:
+  my_first_job:
+   name: my first job
     env:
       CI: true
 
@@ -29,9 +30,9 @@ jobs:
 
       - name: Run UTs
         run: npm start
-        
-  job_2:
-    needs: job_1
+
+   my_second_job:
+    needs: my_first_job
 
     env:
       CI: true
