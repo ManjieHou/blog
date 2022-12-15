@@ -7,7 +7,8 @@ on:
     branches: [ master ]
 
 
-job1:
+jobs:
+  job_1:
    runs-on: windows-latest
 
    steps:
@@ -23,8 +24,8 @@ job1:
       - name: Run UTs
         run: npm start
 
-  job2:
-    needs: my_first_job
+  job_2:
+    needs: job_1
 
     runs-on: windows-latest
 
@@ -44,8 +45,10 @@ job1:
         run: npm start
 
       
-      - name: Build production app
+      - name: CI production app
         run: npm ci
+      
+      - name: Build production app
         run: npm run build
 
       - name: Deploy
