@@ -8,22 +8,15 @@ on:
 
 jobs:
   my_first_job:
+   runs-on: windows-latest
    name: my first job
-    env:
-      CI: true
-
-    runs-on: windows-latest
-
-    strategy:
-      matrix:
-        node-version: [15.4.0]
 
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js 
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: '15.x'
       
       - name: Install dependencies
         run: npm install
@@ -33,9 +26,6 @@ jobs:
 
    my_second_job:
     needs: my_first_job
-
-    env:
-      CI: true
 
     runs-on: windows-latest
 
@@ -58,7 +48,9 @@ jobs:
       - name: Run UTs
         run: npm start
 
-    - name: Build production app
+      
+      - name: Build production app
+        run: npm ci
         run: npm run build
 
       - name: Deploy
