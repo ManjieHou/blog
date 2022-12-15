@@ -6,8 +6,8 @@ on:
   pull_request:
     branches: [ master ]
 
-jobs:
-  job1:
+
+job1:
    runs-on: windows-latest
 
    steps:
@@ -23,7 +23,7 @@ jobs:
       - name: Run UTs
         run: npm start
 
-   job2:
+  job2:
     needs: my_first_job
 
     runs-on: windows-latest
